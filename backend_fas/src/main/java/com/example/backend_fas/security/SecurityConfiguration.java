@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 .requestMatchers(
                     "/api/v1/auth/**",    // đăng ký, đăng nhập → PUBLIC
                     "/api/v1/sensors/**",
+                    "/api/v1/history/**",  // ← THÊM: Lịch sử cảm biến → PUBLIC
                     "/v3/api-docs/**",    // Swagger docs → PUBLIC
                     "/swagger-ui/**",    // Swagger UI → PUBLIC
                     "/swagger-ui.html"
