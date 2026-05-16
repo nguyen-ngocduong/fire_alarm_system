@@ -1,0 +1,434 @@
+/* ============================================
+   ICON ANIMATIONS FOR FIRE ALARM SYSTEM
+   ============================================ */
+
+/* Base icon styles */
+.icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-sm {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-md {
+  width: 32px;
+  height: 32px;
+}
+
+.icon-lg {
+  width: 48px;
+  height: 48px;
+}
+
+/* ============================================
+   ALERT ANIMATIONS
+   ============================================ */
+
+/* Fire Alert - Pulsing effect */
+.icon-fire-alert {
+  animation: pulse-fire 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-fire {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* Siren - Rotating flash */
+.icon-siren {
+  animation: siren-flash 1s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes siren-flash {
+  0%, 100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  25% {
+    opacity: 0.6;
+    transform: rotate(-10deg);
+  }
+  75% {
+    opacity: 0.6;
+    transform: rotate(10deg);
+  }
+}
+
+/* Bell - Ringing animation */
+.icon-bell {
+  animation: bell-ring 2s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes bell-ring {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  10%, 30% {
+    transform: rotate(-15deg);
+  }
+  20%, 40% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Warning - Blink effect */
+.icon-warning {
+  animation: blink-warning 2s ease-in-out infinite;
+}
+
+@keyframes blink-warning {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.3;
+  }
+}
+
+/* Danger - Shake effect */
+.icon-danger {
+  animation: shake-danger 3s ease-in-out infinite;
+}
+
+@keyframes shake-danger {
+  0%, 90%, 100% {
+    transform: translateX(0);
+  }
+  92%, 96% {
+    transform: translateX(-4px);
+  }
+  94%, 98% {
+    transform: translateX(4px);
+  }
+}
+
+/* ============================================
+   STATUS ANIMATIONS
+   ============================================ */
+
+/* Loading - Spinning */
+.icon-loading {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sync - Rotating */
+.icon-sync {
+  animation: sync-rotate 2s ease-in-out infinite;
+}
+
+@keyframes sync-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Online - Pulse glow */
+.icon-online {
+  animation: pulse-online 2s ease-in-out infinite;
+}
+
+@keyframes pulse-online {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  50% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+}
+
+/* Offline - Fade */
+.icon-offline {
+  animation: fade-offline 2s ease-in-out infinite;
+}
+
+@keyframes fade-offline {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* Connected - Success pulse */
+.icon-connected {
+  animation: pulse-success 2s ease-in-out infinite;
+}
+
+@keyframes pulse-success {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ============================================
+   SENSOR ANIMATIONS
+   ============================================ */
+
+/* Flame - Flicker effect */
+.icon-flame {
+  animation: flame-flicker 1.5s ease-in-out infinite;
+}
+
+@keyframes flame-flicker {
+  0%, 100% {
+    transform: scaleY(1) translateY(0);
+    opacity: 1;
+  }
+  25% {
+    transform: scaleY(1.1) translateY(-2px);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scaleY(0.95) translateY(1px);
+    opacity: 0.95;
+  }
+  75% {
+    transform: scaleY(1.05) translateY(-1px);
+    opacity: 0.92;
+  }
+}
+
+/* Smoke - Rising effect */
+.icon-smoke {
+  animation: smoke-rise 3s ease-in-out infinite;
+}
+
+@keyframes smoke-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-3px) scale(1.05);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Gas - Disperse effect */
+.icon-gas {
+  animation: gas-disperse 2s ease-in-out infinite;
+}
+
+@keyframes gas-disperse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.6;
+  }
+}
+
+/* Temperature - Thermometer pulse */
+.icon-temperature {
+  animation: temp-pulse 2s ease-in-out infinite;
+}
+
+@keyframes temp-pulse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* ============================================
+   SYSTEM ANIMATIONS
+   ============================================ */
+
+/* WiFi - Signal waves */
+.icon-wifi {
+  animation: wifi-signal 2s ease-in-out infinite;
+}
+
+@keyframes wifi-signal {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* MQTT - Data flow */
+.icon-mqtt {
+  animation: mqtt-flow 3s linear infinite;
+}
+
+@keyframes mqtt-flow {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/* Firebase - Flame pulse */
+.icon-firebase {
+  animation: firebase-pulse 2s ease-in-out infinite;
+}
+
+@keyframes firebase-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  50% {
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+}
+
+/* ============================================
+   HOVER EFFECTS
+   ============================================ */
+
+.icon-hover {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.icon-hover:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.icon-hover:active {
+  transform: scale(0.95);
+}
+
+/* ============================================
+   STATE MODIFIERS
+   ============================================ */
+
+/* Active state */
+.icon-active {
+  color: var(--color-primary, #3b82f6);
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+/* Disabled state */
+.icon-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Error state */
+.icon-error {
+  color: var(--color-error, #ef4444);
+  animation: shake-error 0.5s ease-in-out;
+}
+
+@keyframes shake-error {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* Success state */
+.icon-success {
+  color: var(--color-success, #10b981);
+  animation: bounce-success 0.6s ease-in-out;
+}
+
+@keyframes bounce-success {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Pause animation on hover */
+.icon-pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
+/* Slow animation */
+.icon-slow {
+  animation-duration: 3s !important;
+}
+
+/* Fast animation */
+.icon-fast {
+  animation-duration: 0.5s !important;
+}
+
+/* No animation */
+.icon-no-animation {
+  animation: none !important;
+}
+
+/* Rotate 90 degrees */
+.icon-rotate-90 {
+  transform: rotate(90deg);
+}
+
+/* Rotate 180 degrees */
+.icon-rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Flip horizontal */
+.icon-flip-h {
+  transform: scaleX(-1);
+}
+
+/* Flip vertical */
+.icon-flip-v {
+  transform: scaleY(-1);
+}
