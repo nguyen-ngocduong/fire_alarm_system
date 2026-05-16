@@ -34,3 +34,6 @@ build/
 .vscode/
 ### .env
 .env
+### resource
+backend_fas/src/main/resources/fire-alarm-system-61062-firebase-adminsdk-fbsvc-7754ada60c.json
+backend_fas/src/main/resources/application.yml

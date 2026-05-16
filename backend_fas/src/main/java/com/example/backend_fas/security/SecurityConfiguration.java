@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import lombok.RequiredArgsConstructor;
 @Configuration
@@ -18,12 +19,16 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthFilter;
+    private final CorsConfigurationSource corsConfigurationSource;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             // Tắt CSRF (Cross-Site Request Forgery)
             // REST API dùng token nên không cần CSRF protection
             .csrf(AbstractHttpConfigurer::disable)
+            
+            // Bật CORS với cấu hình từ CorsConfig
+            .cors(cors -> cors.configurationSource(corsConfigurationSource))
 
             // Cấu hình phân quyền endpoint
             .authorizeHttpRequests(auth -> auth
