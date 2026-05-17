@@ -11,7 +11,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import jakarta.annotation.PostConstruct;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.management.RuntimeErrorException;
@@ -30,10 +29,17 @@ public class FirebaseConfig {
     public void initialize(){
         try{
             // su dung Account dc phep truy cap Firebase
-            FileInputStream serviceAccount = new FileInputStream(serviceAccountKeyPath);
+            // Đọc file từ classpath (bên trong JAR) thay vì filesystem
+            var serviceAccountStream = getClass().getClassLoader()
+                .getResourceAsStream(serviceAccountKeyPath);
+            
+            if (serviceAccountStream == null) {
+                throw new IOException("Firebase credentials file not found in classpath: " + serviceAccountKeyPath);
+            }
+            
             // ket noi BE voi Firebase
             FirebaseOptions options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setCredentials(GoogleCredentials.fromStream(serviceAccountStream))
                 .setDatabaseUrl(databaseUrl)
                 .build();
             if(FirebaseApp.getApps().isEmpty()){
@@ -42,7 +48,7 @@ public class FirebaseConfig {
                 log.info("📡 Database URL: {}", databaseUrl);
             }
         }catch(IOException e){
-            log.error("nitialize Firebase Admin SDK ", e);
+            log.error("Failed to initialize Firebase Admin SDK ", e);
             throw new RuntimeException("Could not initialize Firebase ", e);
         }
     }
