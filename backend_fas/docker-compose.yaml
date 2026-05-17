@@ -16,29 +16,29 @@ services:
     networks:
       - fire-alarm-system
 
-  # backend:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: backend_fas
-  #   ports:
-  #     - "${SERVER_PORT:-8081}:8081"
-  #   environment:
-  #     - POSTGRES_HOST=postgres
-  #     - POSTGRES_PORT=5432
-  #     - POSTGRES_DB=${POSTGRES_DB:-fire_alarm_system}
-  #     - POSTGRES_USER=${POSTGRES_USER:-admin}
-  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-Duong123}
-  #     - JWT_SECRET=${JWT_SECRET}
-  #     - JWT_EXPIRATION=${JWT_EXPIRATION:-86400000}
-  #     - JWT_REFRESH_EXPIRATION=${JWT_REFRESH_EXPIRATION:-604800000}
-  #     - FIREBASE_DATABASE_URL=${FIREBASE_DATABASE_URL}
-  #     - FIREBASE_SERVICE_ACCOUNT_KEY_PATH=${FIREBASE_SERVICE_ACCOUNT_KEY_PATH}
-  #   depends_on:
-  #     - postgres
-  #   restart: always
-  #   networks:
-  #     - fire-alarm-system
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_fas
+    ports:
+      - "${SERVER_PORT:-8081}:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-fire_alarm_system}
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER:-admin}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD:-Duong123}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRATION=${JWT_EXPIRATION:-86400000}
+      - JWT_REFRESH_EXPIRATION=${JWT_REFRESH_EXPIRATION:-604800000}
+      - FIREBASE_DATABASE_URL=${FIREBASE_DATABASE_URL}
+      - FIREBASE_SERVICE_ACCOUNT_KEY_PATH=${FIREBASE_SERVICE_ACCOUNT_KEY_PATH}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=${SPRING_JPA_HIBERNATE_DDL_AUTO:-update}
+      - SPRING_JPA_SHOW_SQL=${SPRING_JPA_SHOW_SQL:-false}
+    depends_on:
+      - postgres
+    restart: always
+    networks:
+      - fire-alarm-system
 
 networks:
   fire-alarm-system:
