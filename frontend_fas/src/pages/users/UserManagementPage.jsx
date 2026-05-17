@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAllUsers, createUser, updateUser, deleteUser } from '../../api/userApi';
+import { getAllUsers, createUser, updateUserById, deleteUser } from '../../api/userApi';
 import useAuth from '../../hooks/useAuth';
 import useToast from '../../hooks/useToast';
 import useConfirm from '../../hooks/useConfirm';
@@ -68,7 +68,7 @@ const UserManagementPage = () => {
   const handleSubmit = async (formData) => {
     try {
       if (editingUser) {
-        await updateUser(editingUser.id, formData);
+        await updateUserById(editingUser.id, formData);
         showToast('success', 'Đã cập nhật người dùng');
       } else {
         await createUser(formData);

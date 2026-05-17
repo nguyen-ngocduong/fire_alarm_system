@@ -189,3 +189,79 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1rem;
   }
 }
+
+/* Datetime picker styling - Smooth scrolling and better UX */
+input[type="datetime-local"] {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Smooth scrolling for datetime picker dropdown */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+  background-color: rgba(26, 86, 219, 0.1);
+}
+
+/* Smooth scrolling for datetime picker internal elements */
+input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-text {
+  padding: 0 0.25rem;
+  color: #6B7280;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-month-field,
+input[type="datetime-local"]::-webkit-datetime-edit-day-field,
+input[type="datetime-local"]::-webkit-datetime-edit-year-field,
+input[type="datetime-local"]::-webkit-datetime-edit-hour-field,
+input[type="datetime-local"]::-webkit-datetime-edit-minute-field {
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.15s ease;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-month-field:hover,
+input[type="datetime-local"]::-webkit-datetime-edit-day-field:hover,
+input[type="datetime-local"]::-webkit-datetime-edit-year-field:hover,
+input[type="datetime-local"]::-webkit-datetime-edit-hour-field:hover,
+input[type="datetime-local"]::-webkit-datetime-edit-minute-field:hover {
+  background-color: rgba(26, 86, 219, 0.1);
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-month-field:focus,
+input[type="datetime-local"]::-webkit-datetime-edit-day-field:focus,
+input[type="datetime-local"]::-webkit-datetime-edit-year-field:focus,
+input[type="datetime-local"]::-webkit-datetime-edit-hour-field:focus,
+input[type="datetime-local"]::-webkit-datetime-edit-minute-field:focus {
+  background-color: rgba(26, 86, 219, 0.2);
+  outline: none;
+}
+
+/* Number input styling */
+input[type="number"] {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Remove spinner arrows on hover for cleaner look */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+input[type="number"]:hover::-webkit-inner-spin-button,
+input[type="number"]:hover::-webkit-outer-spin-button {
+  opacity: 1;
+}
+

@@ -39,25 +39,37 @@ const ChartControls = ({
       {!hideCustomRange && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-secondary mb-1">
+            <label className="block text-sm font-medium text-gray-900 mb-2">
               Từ
             </label>
             <input
               type="datetime-local"
               value={customFrom}
               onChange={(e) => onCustomChange('from', e.target.value)}
-              className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-2.5 bg-white text-gray-900 border border-gray-300 rounded-lg 
+                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
+                         transition-all duration-200 cursor-pointer
+                         hover:border-primary hover:shadow-sm"
+              style={{
+                colorScheme: 'light',
+              }}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-text-secondary mb-1">
+            <label className="block text-sm font-medium text-gray-900 mb-2">
               Đến
             </label>
             <input
               type="datetime-local"
               value={customTo}
               onChange={(e) => onCustomChange('to', e.target.value)}
-              className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-2.5 bg-white text-gray-900 border border-gray-300 rounded-lg 
+                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
+                         transition-all duration-200 cursor-pointer
+                         hover:border-primary hover:shadow-sm"
+              style={{
+                colorScheme: 'light',
+              }}
             />
           </div>
         </div>

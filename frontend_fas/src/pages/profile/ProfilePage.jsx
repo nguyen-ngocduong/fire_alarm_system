@@ -56,19 +56,21 @@ const ProfilePage = () => {
     setErrors({});
 
     try {
-      const { data } = await updateUser(user.id, formData);
+      const { data } = await updateUser(formData);
       updateAuthUser(data);
       showToast('success', 'Cập nhật thông tin thành công!');
     } catch (error) {
       console.error('Error updating profile:', error);
-      const errorMessage = error.response?.data?.message || error.message;
+      const errorMessage = error.response?.data?.message || error.message || '';
       
-      if (errorMessage?.includes('username')) {
-        setErrors({ username: 'Tên đăng nhập này đã được sử dụng' });
-      } else if (errorMessage?.includes('email')) {
-        setErrors({ email: 'Email này đã được đăng ký' });
+      if (errorMessage.toLowerCase().includes('username')) {
+        setErrors({ username: 'Tên đăng nhập này đã được sử dụng bởi người khác' });
+        showToast('error', 'Tên đăng nhập đã tồn tại');
+      } else if (errorMessage.toLowerCase().includes('email')) {
+        setErrors({ email: 'Email này đã được đăng ký bởi người khác' });
+        showToast('error', 'Email đã tồn tại');
       } else {
-        showToast('error', 'Không thể cập nhật thông tin');
+        showToast('error', 'Không thể cập nhật thông tin. Vui lòng thử lại!');
       }
     } finally {
       setIsLoading(false);
