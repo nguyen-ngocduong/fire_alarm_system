@@ -50,10 +50,21 @@ public class UserController {
     public ResponseEntity<UserDto> getUserById(){
         return ResponseEntity.ok(service.getUserById());
     }
-    @PutMapping("/update/user/{id}/profile")
+    @PutMapping("/update/profile")
     @Operation(summary = "Update current user profile", description = "Update username, email, and other info for the currently authenticated user")
     public ResponseEntity<UserDto> updateProfile(@Valid @RequestBody UserDto userDto) {
         UserDto updatedUser = service.updateUser(userDto);
+        if (updatedUser != null) {
+            return ResponseEntity.ok(updatedUser);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+    
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/update/user/{id}")
+    @Operation(summary = "Update any user (Admin only)", description = "Admin can update any user's information by their ID")
+    public ResponseEntity<UserDto> updateUserById(@PathVariable Long id, @Valid @RequestBody UserDto userDto) {
+        UserDto updatedUser = service.updateUserById(id, userDto);
         if (updatedUser != null) {
             return ResponseEntity.ok(updatedUser);
         }

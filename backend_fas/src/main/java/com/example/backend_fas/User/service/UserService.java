@@ -73,17 +73,73 @@ public class UserService {
     @Transactional
     public UserDto updateUser(UserDto userDto) {
         User currentUser = getCurrentUser();
-        // validateAdmin(currentUser);
         Long id = currentUser.getId();
-        return userRepository.findById(id)
-                .map(user -> {
-                    user.setUsername(userDto.getUsername());
-                    user.setEmail(userDto.getEmail());
-                    user.setRole(userDto.getRole());
-                    User updatedUser = userRepository.save(user);
-                    return mapToDto(updatedUser);
-                })
-                .orElse(null);
+        
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        // Validate username change BEFORE modifying the entity
+        if (!user.getUsername().equals(userDto.getUsername())) {
+            Optional<User> existingUser = userRepository.findByUsername(userDto.getUsername());
+            if (existingUser.isPresent() && !existingUser.get().getId().equals(id)) {
+                throw new RuntimeException("Username already exists");
+            }
+        }
+        
+        // Validate email change BEFORE modifying the entity
+        if (!user.getEmail().equals(userDto.getEmail())) {
+            Optional<User> existingUser = userRepository.findByEmail(userDto.getEmail());
+            if (existingUser.isPresent() && !existingUser.get().getId().equals(id)) {
+                throw new RuntimeException("Email already exists");
+            }
+        }
+        
+        // Now it's safe to update the entity
+        user.setUsername(userDto.getUsername());
+        user.setEmail(userDto.getEmail());
+        
+        // Only admin can change role, regular users keep their current role
+        if (currentUser.getRole() == Role.ADMIN && userDto.getRole() != null) {
+            user.setRole(userDto.getRole());
+        }
+        
+        User updatedUser = userRepository.save(user);
+        return mapToDto(updatedUser);
+    }
+
+    @Transactional
+    public UserDto updateUserById(Long id, UserDto userDto) {
+        User currentUser = getCurrentUser();
+        validateAdmin(currentUser);
+        
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        // Validate username change BEFORE modifying the entity
+        if (!user.getUsername().equals(userDto.getUsername())) {
+            Optional<User> existingUser = userRepository.findByUsername(userDto.getUsername());
+            if (existingUser.isPresent() && !existingUser.get().getId().equals(id)) {
+                throw new RuntimeException("Username already exists");
+            }
+        }
+        
+        // Validate email change BEFORE modifying the entity
+        if (!user.getEmail().equals(userDto.getEmail())) {
+            Optional<User> existingUser = userRepository.findByEmail(userDto.getEmail());
+            if (existingUser.isPresent() && !existingUser.get().getId().equals(id)) {
+                throw new RuntimeException("Email already exists");
+            }
+        }
+        
+        // Admin can update everything
+        user.setUsername(userDto.getUsername());
+        user.setEmail(userDto.getEmail());
+        if (userDto.getRole() != null) {
+            user.setRole(userDto.getRole());
+        }
+        
+        User updatedUser = userRepository.save(user);
+        return mapToDto(updatedUser);
     }
 
     @Transactional
