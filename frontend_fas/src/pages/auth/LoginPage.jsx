@@ -6,8 +6,8 @@ import { decodeToken, setTokens } from '../../utils/tokenUtils';
 import useAuth from '../../hooks/useAuth';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
+import ParticleBackground from '../../components/common/ParticleBackground';
 import logo from '../../assets/logo/fire-alarm-logo.png';
-import registerSigninBg from '../../assets/backgrounds/register_sigin.png';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -89,14 +89,8 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex">
       {/* Left side - Branding with background */}
-      <div 
-        className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary to-primary-dark text-white p-12 flex-col justify-center relative overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.8), rgba(153, 27, 27, 0.8)), url(${registerSigninBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
+      <div className="hidden lg:flex lg:w-1/2 bg-slate-950 text-white p-12 flex-col justify-center relative overflow-hidden border-r border-white/5">
+        <ParticleBackground preset="auth" />
         <div className="max-w-md relative z-10">
           {/* Logo */}
           <div className="mb-8 flex items-center gap-4">
@@ -144,8 +138,9 @@ const LoginPage = () => {
       </div>
 
       {/* Right side - Login form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-bg">
-        <div className="w-full max-w-md">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-bg relative overflow-hidden">
+        <ParticleBackground preset="auth" />
+        <div className="w-full max-w-md relative z-10">
           {/* Mobile logo */}
           <div className="text-center mb-8 lg:hidden">
             <div className="flex items-center justify-center gap-3 mb-4">

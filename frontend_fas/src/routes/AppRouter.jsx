@@ -10,13 +10,14 @@ import AlertManagementPage from '../pages/alerts/AlertManagementPage';
 import UserManagementPage from '../pages/users/UserManagementPage';
 import ProfilePage from '../pages/profile/ProfilePage';
 import NotFoundPage from '../pages/NotFoundPage';
+import PageTransition from '../components/common/PageTransition';
 
 const AppRouter = () => {
   return (
     <Routes>
       {/* Public routes */}
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/login" element={<PageTransition><LoginPage /></PageTransition>} />
+      <Route path="/register" element={<PageTransition><RegisterPage /></PageTransition>} />
 
       {/* Private routes */}
       <Route
@@ -28,24 +29,26 @@ const AppRouter = () => {
         }
       >
         <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<DashboardPage />} />
-        <Route path="chart" element={<ChartPage />} />
-        <Route path="alerts" element={<AlertManagementPage />} />
-        <Route path="profile" element={<ProfilePage />} />
+        <Route path="dashboard" element={<PageTransition><DashboardPage /></PageTransition>} />
+        <Route path="chart" element={<PageTransition><ChartPage /></PageTransition>} />
+        <Route path="alerts" element={<PageTransition><AlertManagementPage /></PageTransition>} />
+        <Route path="profile" element={<PageTransition><ProfilePage /></PageTransition>} />
         
         {/* Admin only routes */}
         <Route
           path="users"
           element={
             <AdminRoute>
-              <UserManagementPage />
+              <PageTransition>
+                <UserManagementPage />
+              </PageTransition>
             </AdminRoute>
           }
         />
       </Route>
 
       {/* 404 */}
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
     </Routes>
   );
 };

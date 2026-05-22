@@ -6,8 +6,8 @@ import { decodeToken, setTokens } from '../../utils/tokenUtils';
 import useAuth from '../../hooks/useAuth';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
+import ParticleBackground from '../../components/common/ParticleBackground';
 import logo from '../../assets/logo/fire-alarm-logo.png';
-import registerSigninBg from '../../assets/backgrounds/register_sigin.png';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -119,15 +119,8 @@ const RegisterPage = () => {
   };
 
   return (
-    <div 
-      className="min-h-screen flex items-center justify-center p-8 relative"
-      style={{
-        backgroundImage: `linear-gradient(rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.1)), url(${registerSigninBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundColor: '#f9fafb',
-      }}
-    >
+    <div className="min-h-screen flex items-center justify-center p-8 relative bg-bg overflow-hidden">
+      <ParticleBackground preset="auth" />
       <div className="w-full max-w-md relative z-10">
         {/* Logo and title */}
         <div className="text-center mb-8">
@@ -137,10 +130,10 @@ const RegisterPage = () => {
           <h1 className="text-3xl font-black text-text-primary mb-2">
             Fire Alarm System
           </h1>
-          <p className="text-slate-700 font-bold text-lg">Tạo tài khoản mới</p>
+          <p className="text-text-secondary font-medium text-lg">Tạo tài khoản mới</p>
         </div>
 
-        <div className="card backdrop-blur-sm bg-white/95">
+        <div className="card border-white/5 bg-slate-900/60">
           <h2 className="text-2xl font-bold text-text-primary mb-6">Đăng ký</h2>
 
           {errors.general && (

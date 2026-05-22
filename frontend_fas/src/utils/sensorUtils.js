@@ -137,7 +137,15 @@ export const getWarningList = (sensorData) => {
     const status = getSensorStatus(sensorType, value);
     const threshold = SENSOR_THRESHOLDS[sensorType];
     
-    if (status === 'danger' && threshold.danger !== null) {
+    if (threshold.isBoolean) {
+      if (value === true) {
+        warnings.push({
+          sensorType,
+          message: `Phát hiện ngọn lửa (Cảm biến Flame kích hoạt!)`,
+          severity: 'danger',
+        });
+      }
+    } else if (status === 'danger' && threshold.danger !== null) {
       warnings.push({
         sensorType,
         message: `${threshold.name} vượt ngưỡng nguy hiểm (${value}${threshold.unit} > ${threshold.danger}${threshold.unit})`,
@@ -186,6 +194,53 @@ export const isDangerStatus = (status) => {
   
   const upperStatus = status.toUpperCase();
   return upperStatus === 'FLAME_DETECTED' || upperStatus === 'ALERT';
+};
+
+/**
+ * Lấy trạng thái tổng hợp của toàn bộ hệ thống
+ * @param {object} sensorData
+ * @returns {string} - 'safe', 'warning', hoặc 'danger'
+ */
+export const getSystemStatus = (sensorData) => {
+  if (!sensorData) return 'safe';
+
+  const lpgVal = getSensorValue(sensorData, 'lpg');
+  const smokeVal = getSensorValue(sensorData, 'smoke');
+  const rawGasVal = getSensorValue(sensorData, 'rawGas');
+  const irFlameVal = getSensorValue(sensorData, 'irFlame');
+  const tempVal = getSensorValue(sensorData, 'temperature');
+  const flameVal = getSensorValue(sensorData, 'flame');
+
+  // 1. Trạng thái DANGER (Nguy hiểm / Có lửa)
+  const isDanger =
+    isDangerStatus(sensorData.status) ||
+    flameVal === true ||
+    (tempVal !== null && tempVal >= 45) ||
+    (lpgVal !== null && lpgVal >= 1000) ||
+    (smokeVal !== null && smokeVal >= 200) ||
+    (rawGasVal !== null && rawGasVal >= 1500) ||
+    (irFlameVal !== null && irFlameVal >= 3500);
+
+  if (isDanger) {
+    return 'danger';
+  }
+
+  // 2. Trạng thái WARNING (Cảnh báo) sử dụng logic HOẶC (OR)
+  const statusUpper = sensorData.status?.toUpperCase();
+  const isWarning =
+    statusUpper === 'GAS_LEAK_ALERT' ||
+    statusUpper === 'HIGH_TEMP_FIRE' ||
+    (lpgVal !== null && lpgVal > 800) ||
+    (smokeVal !== null && smokeVal > 100) ||
+    (rawGasVal !== null && rawGasVal > 1200) ||
+    (irFlameVal !== null && irFlameVal > 2500) ||
+    (tempVal !== null && tempVal >= 40);
+
+  if (isWarning) {
+    return 'warning';
+  }
+
+  return 'safe';
 };
 
 /**

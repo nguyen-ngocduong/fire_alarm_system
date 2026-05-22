@@ -8,8 +8,8 @@ const AlertBell = () => {
     <div className="relative">
       <button
         className={`
-          p-2 rounded-lg transition-all
-          ${hasActiveAlert ? 'bg-danger text-white animate-shake' : 'bg-gray-100 text-text-secondary hover:bg-gray-200'}
+          p-2 rounded-lg transition-all border
+          ${hasActiveAlert ? 'bg-danger border-danger text-white animate-shake' : 'bg-slate-950/40 border-white/5 text-text-secondary hover:bg-slate-900/60 hover:text-white'}
         `}
         aria-label="Cảnh báo"
       >

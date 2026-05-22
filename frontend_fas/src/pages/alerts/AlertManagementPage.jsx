@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   getActiveDevices,
   startListening,
@@ -14,7 +14,6 @@ import useConfirm from '../../hooks/useConfirm';
 import ConfirmDialog from '../../components/common/ConfirmDialog';
 import { ToastContainer } from '../../components/common/Toast';
 import { formatCooldownTime } from '../../utils/dateUtils';
-import { backgrounds } from '../../assets/backgrounds';
 
 const AlertManagementPage = () => {
   const [devices, setDevices] = useState([]);
@@ -24,7 +23,7 @@ const AlertManagementPage = () => {
   const { toasts, showToast, removeToast } = useToast();
   const { isOpen, config, confirm, handleConfirm, handleCancel } = useConfirm();
 
-  const fetchDevices = async () => {
+  const fetchDevices = useCallback(async () => {
     try {
       const { data } = await getActiveDevices();
       // Backend trả về Map<String, Boolean>, cần chuyển đổi thành array
@@ -40,14 +39,14 @@ const AlertManagementPage = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [showToast]);
 
   useEffect(() => {
     fetchDevices();
     // Refresh mỗi 5 giây để cập nhật cooldown
     const interval = setInterval(fetchDevices, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchDevices]);
 
   const handleStart = async (deviceId) => {
     const confirmed = await confirm(
@@ -145,8 +144,8 @@ const AlertManagementPage = () => {
       </div>
 
       {/* Section 1: Monitored devices */}
-      <div className="card" style={{ background: 'linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%)' }}>
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Thiết bị đang giám sát</h2>
+      <div className="card border-white/5 bg-slate-900/60">
+        <h2 className="text-xl font-semibold text-white mb-4">Thiết bị đang giám sát</h2>
         
         {isLoading ? (
           <div className="space-y-3">
@@ -155,32 +154,32 @@ const AlertManagementPage = () => {
             ))}
           </div>
         ) : devices.length === 0 ? (
-          <p className="text-gray-700 text-center py-8">
+          <p className="text-text-secondary text-center py-8">
             Chưa có thiết bị nào đang được giám sát
           </p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-300">
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
+                <tr className="border-b border-border">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-text-secondary">
                     Thiết bị
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-text-secondary">
                     Trạng thái
                   </th>
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-text-secondary">
                     Cooldown
                   </th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">
+                  <th className="text-right py-3 px-4 text-sm font-semibold text-text-secondary">
                     Hành động
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {devices.map((device) => (
-                  <tr key={device.deviceId} className="border-b border-gray-200 last:border-0">
-                    <td className="py-3 px-4 font-medium text-gray-900">
+                  <tr key={device.deviceId} className="border-b border-border last:border-0 hover:bg-white/5">
+                    <td className="py-3 px-4 font-medium text-text-primary">
                       {device.deviceId}
                     </td>
                     <td className="py-3 px-4">
@@ -237,9 +236,9 @@ const AlertManagementPage = () => {
       </div>
 
       {/* Section 2: Test email */}
-      <div className="card" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)' }}>
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Kiểm tra cấu hình Email</h2>
-        <p className="text-gray-700 mb-4">
+      <div className="card border-primary/20 bg-primary-light backdrop-blur-md">
+        <h2 className="text-xl font-semibold text-white mb-4">Kiểm tra cấu hình Email</h2>
+        <p className="text-text-secondary mb-4">
           Gửi một email test để kiểm tra cấu hình SMTP có hoạt động đúng không.
         </p>
         <div className="flex gap-3 items-start">
@@ -249,7 +248,7 @@ const AlertManagementPage = () => {
               placeholder="Nhập địa chỉ email nhận test..."
               value={testEmail}
               onChange={(e) => setTestEmail(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-2 rounded-lg border border-white/10 bg-slate-950/40 text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition"
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                   handleTestEmail();

@@ -48,7 +48,7 @@ const UserTable = ({ users, currentUserId, onEdit, onDelete, isLoading }) => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id} className="border-b border-border last:border-0 hover:bg-gray-50">
+            <tr key={user.id} className="border-b border-border last:border-0 hover:bg-white/5">
               <td className="py-3 px-4 text-text-primary">{user.id}</td>
               <td className="py-3 px-4 font-medium text-text-primary">
                 {user.username}

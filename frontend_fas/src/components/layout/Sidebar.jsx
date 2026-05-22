@@ -39,7 +39,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           md:translate-x-0 md:static
         `}
         style={{
-          background: 'linear-gradient(180deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%)',
+          background: 'linear-gradient(180deg, #090d16 0%, #0f172a 100%)',
         }}
       >
         {/* Logo */}

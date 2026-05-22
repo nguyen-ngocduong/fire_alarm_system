@@ -129,7 +129,7 @@ const UserFormModal = ({ isOpen, onClose, onSubmit, initialData = null }) => {
         {!initialData && (
           <div className="p-3 bg-primary-light border border-primary rounded-lg">
             <p className="text-sm text-text-secondary">
-              💡 Mật khẩu mặc định sẽ là <strong>"password"</strong>. 
+              💡 Mật khẩu mặc định sẽ là <strong>&quot;password&quot;</strong>. 
               Người dùng nên đổi mật khẩu sau khi đăng nhập lần đầu.
             </p>
           </div>

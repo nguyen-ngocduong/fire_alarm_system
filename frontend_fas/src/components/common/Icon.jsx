@@ -8,7 +8,7 @@ import { alertIcons, navigationIcons, sensorIcons, statusIcons, systemIcons, use
  * @param {string} size - Size preset (xs, sm, md, lg, xl) or custom
  * @param {string} alt - Alt text for accessibility
  */
-const Icon = ({ category, name, className = '', size = 'md', alt = 'icon', ...props }) => {
+const Icon = ({ category, name, className = '', size = 'md', alt = 'icon', animate = false, ...props }) => {
   const iconCategories = {
     alert: alertIcons,
     navigation: navigationIcons,
@@ -28,6 +28,26 @@ const Icon = ({ category, name, className = '', size = 'md', alt = 'icon', ...pr
     '3xl': 'w-12 h-12',
   };
 
+  const animationMap = {
+    flame: 'icon-flame',
+    smoke: 'icon-smoke',
+    gas: 'icon-gas',
+    temperature: 'icon-temperature',
+    bell: 'icon-bell',
+    alarm: 'icon-alarm',
+    siren: 'icon-siren',
+    warning: 'icon-warning',
+    danger: 'icon-danger',
+    sync: 'icon-sync',
+    loading: 'icon-loading',
+    online: 'icon-online',
+    offline: 'icon-offline',
+    connected: 'icon-connected',
+    wifi: 'icon-wifi',
+    mqtt: 'icon-mqtt',
+    firebase: 'icon-firebase',
+  };
+
   const iconSrc = iconCategories[category]?.[name];
 
   if (!iconSrc) {
@@ -36,12 +56,13 @@ const Icon = ({ category, name, className = '', size = 'md', alt = 'icon', ...pr
   }
 
   const sizeClass = sizeClasses[size] || size;
+  const animationClass = animate && animationMap[name] ? animationMap[name] : '';
 
   return (
     <img
       src={iconSrc}
       alt={alt}
-      className={`inline-block ${sizeClass} ${className}`}
+      className={`inline-block ${sizeClass} ${animationClass} ${className}`}
       {...props}
     />
   );

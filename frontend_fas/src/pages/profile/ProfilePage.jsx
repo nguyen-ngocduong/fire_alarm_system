@@ -8,7 +8,6 @@ import Icon from '../../components/common/Icon';
 import useToast from '../../hooks/useToast';
 import { ToastContainer } from '../../components/common/Toast';
 import { formatTimestamp } from '../../utils/dateUtils';
-import authBg from '../../assets/backgrounds/auth-bg.png';
 
 const ProfilePage = () => {
   const { user, updateUser: updateAuthUser } = useAuth();
@@ -91,19 +90,19 @@ const ProfilePage = () => {
       </div>
 
       {/* User info card */}
-      <div className="card" style={{ background: 'linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%)' }}>
+      <div className="card border-white/5 bg-slate-900/60">
         <div className="flex items-center gap-4 mb-6">
           <div className="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center text-3xl font-bold">
             {user?.username?.charAt(0).toUpperCase()}
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">{user?.username}</h2>
+            <h2 className="text-2xl font-bold text-white">{user?.username}</h2>
             <div className="flex items-center gap-2 mt-1">
               <Badge variant={user?.role === 'ADMIN' ? 'primary' : 'normal'}>
                 {user?.role}
               </Badge>
               {user?.createdAt && (
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-text-secondary">
                   Tham gia: {formatTimestamp(user.createdAt, 'dd/MM/yyyy')}
                 </span>
               )}
@@ -112,55 +111,26 @@ const ProfilePage = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-900 mb-1">
-              Tên đăng nhập
-              <span className="text-danger ml-1">*</span>
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              placeholder="Nhập tên đăng nhập"
-              required
-              className={`
-                w-full px-4 py-2 border rounded-lg bg-white text-gray-900
-                ${errors.username ? 'border-danger focus:ring-danger' : 'border-gray-300 focus:ring-primary'}
-                focus:outline-none focus:ring-2 focus:ring-offset-0
-                transition-colors duration-200
-              `}
-            />
-            {errors.username && (
-              <p className="mt-1 text-sm text-danger">{errors.username}</p>
-            )}
-          </div>
+          <Input
+            label="Tên đăng nhập"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            placeholder="Nhập tên đăng nhập"
+            required
+            error={errors.username}
+          />
 
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-1">
-              Email
-              <span className="text-danger ml-1">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Nhập địa chỉ email"
-              required
-              className={`
-                w-full px-4 py-2 border rounded-lg bg-white text-gray-900
-                ${errors.email ? 'border-danger focus:ring-danger' : 'border-gray-300 focus:ring-primary'}
-                focus:outline-none focus:ring-2 focus:ring-offset-0
-                transition-colors duration-200
-              `}
-            />
-            {errors.email && (
-              <p className="mt-1 text-sm text-danger">{errors.email}</p>
-            )}
-          </div>
+          <Input
+            label="Email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Nhập địa chỉ email"
+            required
+            error={errors.email}
+          />
 
           <div className="flex justify-end">
             <Button
@@ -175,9 +145,9 @@ const ProfilePage = () => {
       </div>
 
       {/* Additional info */}
-      <div className="card border-primary" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)' }}>
-        <h3 className="font-semibold text-gray-900 mb-2">💡 Lưu ý</h3>
-        <ul className="text-sm text-gray-700 space-y-1">
+      <div className="card border-primary/20 bg-primary-light backdrop-blur-md">
+        <h3 className="font-semibold text-white mb-2">💡 Lưu ý</h3>
+        <ul className="text-sm text-text-secondary space-y-1">
           <li>• Tên đăng nhập phải có ít nhất 3 ký tự</li>
           <li>• Email phải là địa chỉ hợp lệ</li>
           <li>• Liên hệ Admin nếu cần thay đổi mật khẩu</li>

@@ -1,0 +1,151 @@
+/* Container */
+.status-visual-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.status-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Radar Rotating Animation */
+@keyframes slow-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-slow-rotate {
+  transform-origin: center;
+  animation: slow-rotate 10s linear infinite;
+}
+
+/* Radar Pulsing Rings */
+@keyframes radar-pulse-anim {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(0.85);
+    opacity: 0.2;
+  }
+}
+
+.radar-pulse {
+  transform-origin: center;
+  animation: radar-pulse-anim 3s ease-in-out infinite;
+}
+
+.radar-pulse-fast {
+  transform-origin: center;
+  animation: radar-pulse-anim 1.5s ease-in-out infinite;
+}
+
+/* Shockwave expansion */
+@keyframes shockwave-anim {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+    stroke-width: 3;
+  }
+  80% {
+    opacity: 0.3;
+    stroke-width: 1.5;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+    stroke-width: 0.5;
+  }
+}
+
+.radar-shockwave {
+  transform-origin: center;
+  animation: shockwave-anim 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+.radar-shockwave-delay {
+  transform-origin: center;
+  animation: shockwave-anim 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  animation-delay: 1s;
+}
+
+/* Flame layer flicker animations */
+@keyframes outer-flicker {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  30% {
+    transform: scaleX(0.97) scaleY(1.03) translateY(-1px);
+  }
+  60% {
+    transform: scaleX(1.02) scaleY(0.96) translateY(1px);
+  }
+  80% {
+    transform: scaleX(0.98) scaleY(1.02) translateY(-0.5px);
+  }
+}
+
+@keyframes middle-flicker {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  25% {
+    transform: scaleX(1.04) scaleY(0.95) translateY(1px);
+  }
+  50% {
+    transform: scaleX(0.95) scaleY(1.05) translateY(-2px);
+  }
+  75% {
+    transform: scaleX(1.02) scaleY(0.98) translateY(0.5px);
+  }
+}
+
+@keyframes inner-flicker {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  20% {
+    transform: scaleX(0.93) scaleY(1.06) translateY(-2.5px);
+  }
+  45% {
+    transform: scaleX(1.07) scaleY(0.92) translateY(1.5px);
+  }
+  70% {
+    transform: scaleX(0.96) scaleY(1.04) translateY(-1px);
+  }
+}
+
+.outer-flame {
+  transform-origin: bottom center;
+  animation: outer-flicker 0.6s ease-in-out infinite;
+}
+
+.middle-flame {
+  transform-origin: bottom center;
+  animation: middle-flicker 0.45s ease-in-out infinite;
+}
+
+.inner-flame {
+  transform-origin: bottom center;
+  animation: inner-flicker 0.3s ease-in-out infinite;
+}
+
+.flame-group {
+  transform-origin: bottom center;
+}

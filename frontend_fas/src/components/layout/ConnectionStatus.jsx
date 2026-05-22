@@ -46,7 +46,7 @@ const ConnectionStatus = () => {
   const config = statusConfig[status];
 
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100">
+    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-950/40 border border-white/5 shadow-inner">
       <span className={status === 'checking' ? 'animate-pulse' : ''}>
         {config.icon}
       </span>

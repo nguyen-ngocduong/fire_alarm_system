@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getAllUsers, createUser, updateUserById, deleteUser } from '../../api/userApi';
 import useAuth from '../../hooks/useAuth';
 import useToast from '../../hooks/useToast';
@@ -9,7 +9,6 @@ import UserTable from '../../components/user/UserTable';
 import UserFormModal from '../../components/user/UserFormModal';
 import ConfirmDialog from '../../components/common/ConfirmDialog';
 import { ToastContainer } from '../../components/common/Toast';
-import authBg from '../../assets/backgrounds/auth-bg.png';
 
 const UserManagementPage = () => {
   const { user: currentUser } = useAuth();
@@ -21,7 +20,7 @@ const UserManagementPage = () => {
   const { toasts, showToast, removeToast } = useToast();
   const { isOpen, config, confirm, handleConfirm, handleCancel } = useConfirm();
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       const { data } = await getAllUsers();
       setUsers(data || []);
@@ -31,11 +30,11 @@ const UserManagementPage = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [showToast]);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers]);
 
   const handleCreate = () => {
     setEditingUser(null);
@@ -66,19 +65,15 @@ const UserManagementPage = () => {
   };
 
   const handleSubmit = async (formData) => {
-    try {
-      if (editingUser) {
-        await updateUserById(editingUser.id, formData);
-        showToast('success', 'Đã cập nhật người dùng');
-      } else {
-        await createUser(formData);
-        showToast('success', 'Đã tạo người dùng mới');
-      }
-      fetchUsers();
-      setShowModal(false);
-    } catch (error) {
-      throw error; // Let modal handle the error
+    if (editingUser) {
+      await updateUserById(editingUser.id, formData);
+      showToast('success', 'Đã cập nhật người dùng');
+    } else {
+      await createUser(formData);
+      showToast('success', 'Đã tạo người dùng mới');
     }
+    fetchUsers();
+    setShowModal(false);
   };
 
   const filteredUsers = users.filter(
@@ -119,18 +114,18 @@ const UserManagementPage = () => {
       </div>
 
       {/* Search */}
-      <div className="backdrop-blur-md border border-slate-200 rounded-2xl shadow-md p-6" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)' }}>
+      <div className="card border-white/5 bg-slate-900/60">
         <input
           type="text"
           placeholder="Tìm kiếm theo tên đăng nhập hoặc email..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-gray-900 placeholder-gray-500"
+          className="w-full px-4 py-3 bg-slate-950/40 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition text-text-primary placeholder-text-muted"
         />
       </div>
 
       {/* User table */}
-      <div className="backdrop-blur-md border border-slate-200 rounded-2xl shadow-lg p-6" style={{ background: 'linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%)' }}>
+      <div className="card border-white/5 bg-slate-900/60">
         <UserTable
           users={filteredUsers}
           currentUserId={currentUser?.id}

@@ -15,7 +15,7 @@ const Input = ({
   return (
     <div className={`mb-4 ${className}`}>
       {label && (
-        <label htmlFor={name} className="block text-sm font-medium text-gray-900 mb-2">
+        <label htmlFor={name} className="block text-sm font-medium text-text-secondary mb-2">
           {label}
           {required && <span className="text-danger ml-1">*</span>}
         </label>
@@ -36,13 +36,13 @@ const Input = ({
           disabled={disabled}
           required={required}
           className={`
-            w-full px-4 py-2 border rounded-lg bg-white text-gray-900
+            w-full px-4 py-2.5 border rounded-lg bg-slate-950/40 text-text-primary
             ${icon ? 'pl-10' : ''}
-            ${error ? 'border-danger focus:ring-danger' : 'border-border focus:ring-primary'}
+            ${error ? 'border-danger focus:ring-danger' : 'border-white/10 focus:border-primary/50 focus:ring-primary/20'}
             focus:outline-none focus:ring-2 focus:ring-offset-0
-            disabled:bg-gray-100 disabled:cursor-not-allowed
-            transition-colors duration-200
-            placeholder:text-gray-400
+            disabled:bg-slate-900/40 disabled:cursor-not-allowed
+            transition-all duration-200
+            placeholder:text-text-muted
           `}
           {...props}
         />

@@ -1,18 +1,15 @@
+import Tilt from 'react-parallax-tilt';
 import Badge from '../common/Badge';
 import Icon from '../common/Icon';
 import {
   getSensorStatus,
   getSensorColor,
-  getSensorBgColor,
   getSensorPercentage,
   getSensorInfo,
-  formatSensorValue,
 } from '../../utils/sensorUtils';
 
 const SensorCard = ({ sensorType, value }) => {
   const status = getSensorStatus(sensorType, value);
-  const color = getSensorColor(status);
-  const bgColor = getSensorBgColor(status);
   const percentage = getSensorPercentage(sensorType, value);
   const info = getSensorInfo(sensorType);
 
@@ -39,15 +36,11 @@ const SensorCard = ({ sensorType, value }) => {
     irFlame: 'infrared',
   };
 
-  // Map sensor types to background colors
-  const sensorBgMap = {
-    temperature: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)', // Yellow gradient
-    humidity: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)', // Blue gradient
-    lpg: 'linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%)', // Pink gradient
-    smoke: 'linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%)', // Gray gradient
-    rawGas: 'linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%)', // Purple gradient
-    flame: 'linear-gradient(135deg, #fee2e2 0%, #fecaca 100%)', // Red gradient
-    irFlame: 'linear-gradient(135deg, #fed7aa 0%, #fdba74 100%)', // Orange gradient
+  // Map sensor types to subtle glow border colors
+  const sensorGlowMap = {
+    normal: 'rgba(16, 185, 129, 0.15)',
+    warning: 'rgba(245, 158, 11, 0.25)',
+    danger: 'rgba(239, 68, 68, 0.35)',
   };
 
   // Xử lý giá trị Boolean cho flame sensor
@@ -59,52 +52,76 @@ const SensorCard = ({ sensorType, value }) => {
     ? (value ? 'danger' : 'normal')
     : status;
 
+  const glowColor = sensorGlowMap[displayStatus] || sensorGlowMap.normal;
+
   return (
-    <div
-      className="card card-hover"
-      style={{ 
-        borderLeft: `4px solid ${getSensorColor(displayStatus)}`,
-        background: sensorBgMap[sensorType] || 'white'
-      }}
+    <Tilt
+      tiltMaxAngleX={10}
+      tiltMaxAngleY={10}
+      scale={1.02}
+      transitionSpeed={1500}
+      glareEnable={true}
+      glareMaxOpacity={0.12}
+      glareColor={getSensorColor(displayStatus)}
+      glarePosition="all"
+      glareBorderRadius="16px"
+      className="h-full"
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <Icon 
-            category="sensor" 
-            name={sensorIconMap[sensorType] || 'temperature'} 
-            size="xl" 
-            alt={info.name}
-            style={{ filter: `drop-shadow(0 0 4px ${getSensorColor(displayStatus)})` }}
-          />
-          <h3 className="text-sm font-semibold text-gray-700">{info.name}</h3>
+      <div
+        className="card card-hover border-t-4 transition-all duration-300 h-full cursor-pointer"
+        style={{ 
+          borderTopColor: getSensorColor(displayStatus),
+          boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 15px ${glowColor}`,
+          background: 'rgba(15, 23, 42, 0.6)'
+        }}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div 
+              className="p-2 rounded-lg bg-slate-950/40 border border-white/5"
+              style={{ boxShadow: `inset 0 0 10px ${glowColor}` }}
+            >
+              <Icon 
+                category="sensor" 
+                name={sensorIconMap[sensorType] || 'temperature'} 
+                size="lg" 
+                alt={info.name}
+                animate={displayStatus !== 'normal'}
+                className="filter brightness-110"
+                style={{ filter: `drop-shadow(0 0 5px ${getSensorColor(displayStatus)})` }}
+              />
+            </div>
+            <h3 className="text-sm font-semibold text-text-secondary">{info.name}</h3>
+          </div>
+          <Badge variant={statusVariants[displayStatus]}>
+            {statusLabels[displayStatus]}
+          </Badge>
         </div>
-        <Badge variant={statusVariants[displayStatus]}>
-          {statusLabels[displayStatus]}
-        </Badge>
-      </div>
 
-      {/* Value */}
-      <div className="mb-3">
-        <p className={`sensor-value ${info.isBoolean ? 'text-2xl' : 'text-3xl'} font-bold text-gray-900`}>
-          {displayValue}
-        </p>
-        {!info.isBoolean && <p className="text-sm text-gray-600">{info.unit}</p>}
-      </div>
-
-      {/* Progress bar - chỉ hiển thị cho sensor số */}
-      {!info.isBoolean && percentage > 0 && (
-        <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-          <div
-            className="h-full rounded-full transition-all duration-500"
-            style={{
-              width: `${Math.min(percentage, 100)}%`,
-              backgroundColor: getSensorColor(displayStatus),
-            }}
-          />
+        {/* Value */}
+        <div className="mb-4">
+          <p className={`sensor-value ${info.isBoolean ? 'text-2xl' : 'text-3xl'} font-bold text-text-primary tracking-wide`}>
+            {displayValue}
+          </p>
+          {!info.isBoolean && <p className="text-xs text-text-muted mt-1">{info.unit}</p>}
         </div>
-      )}
-    </div>
+
+        {/* Progress bar - chỉ hiển thị cho sensor số */}
+        {!info.isBoolean && percentage > 0 && (
+          <div className="w-full bg-slate-950/60 rounded-full h-1.5 overflow-hidden border border-white/5">
+            <div
+              className="h-full rounded-full transition-all duration-500"
+              style={{
+                width: `${Math.min(percentage, 100)}%`,
+                backgroundColor: getSensorColor(displayStatus),
+                boxShadow: `0 0 8px ${getSensorColor(displayStatus)}`,
+              }}
+            />
+          </div>
+        )}
+      </div>
+    </Tilt>
   );
 };
 

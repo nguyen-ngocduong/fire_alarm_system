@@ -11,7 +11,6 @@ import LatestRecordsTable from '../../components/chart/LatestRecordsTable';
 import Spinner from '../../components/common/Spinner';
 import EmptyState from '../../components/common/EmptyState';
 import Icon from '../../components/common/Icon';
-import { backgrounds } from '../../assets/backgrounds';
 
 const ChartPage = () => {
   const { 
@@ -141,7 +140,7 @@ const ChartPage = () => {
 
           <SeriesToggle activeSeries={activeSeries} onToggle={handleToggleSeries} />
 
-          <div className="card" style={{ background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)' }}>
+          <div className="card border-white/5 bg-slate-900/60">
             {isLoading ? (
               <div className="flex items-center justify-center h-96">
                 <Spinner size="lg" />
@@ -185,7 +184,7 @@ const ChartPage = () => {
 
           <SeriesToggle activeSeries={activeSeries} onToggle={handleToggleSeries} />
 
-          <div className="card" style={{ background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)' }}>
+          <div className="card border-white/5 bg-slate-900/60">
             {isLoading ? (
               <div className="flex items-center justify-center h-96">
                 <Spinner size="lg" />
@@ -218,12 +217,12 @@ const ChartPage = () => {
           />
 
           {latestRecords && (
-            <div className="card" style={{ background: 'linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%)' }}>
+            <div className="card border-white/5 bg-slate-900/60">
               <div className="mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-white">
                   📋 {latestRecords.length} bản ghi gần nhất
                 </h3>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-text-secondary">
                   Dữ liệu được sắp xếp từ mới nhất đến cũ nhất
                 </p>
               </div>
@@ -232,7 +231,7 @@ const ChartPage = () => {
           )}
 
           {isLoading && (
-            <div className="card" style={{ background: 'linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%)' }}>
+            <div className="card border-white/5 bg-slate-900/60">
               <div className="flex items-center justify-center h-64">
                 <Spinner size="lg" />
               </div>
@@ -240,7 +239,7 @@ const ChartPage = () => {
           )}
 
           {!isLoading && !latestRecords && (
-            <div className="card" style={{ background: 'linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%)' }}>
+            <div className="card border-white/5 bg-slate-900/60">
               <EmptyState
                 icon="📋"
                 title="Chưa tải dữ liệu"
