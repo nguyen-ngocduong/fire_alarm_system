@@ -20,20 +20,6 @@ export const SENSOR_THRESHOLDS = {
     icon: '💧',
     name: 'Độ ẩm',
   },
-  lpg: {
-    warning: 800,
-    danger: 1000,
-    unit: 'ppm',
-    icon: '⚡',
-    name: 'LPG',
-  },
-  smoke: {
-    warning: 100,
-    danger: 200,
-    unit: 'ppm',
-    icon: '💨',
-    name: 'Khói',
-  },
   rawGas: {
     warning: 1200,
     danger: 1500,

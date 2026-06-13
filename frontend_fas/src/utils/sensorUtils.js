@@ -204,8 +204,6 @@ export const isDangerStatus = (status) => {
 export const getSystemStatus = (sensorData) => {
   if (!sensorData) return 'safe';
 
-  const lpgVal = getSensorValue(sensorData, 'lpg');
-  const smokeVal = getSensorValue(sensorData, 'smoke');
   const rawGasVal = getSensorValue(sensorData, 'rawGas');
   const irFlameVal = getSensorValue(sensorData, 'irFlame');
   const tempVal = getSensorValue(sensorData, 'temperature');
@@ -216,8 +214,6 @@ export const getSystemStatus = (sensorData) => {
     isDangerStatus(sensorData.status) ||
     flameVal === true ||
     (tempVal !== null && tempVal >= 45) ||
-    (lpgVal !== null && lpgVal >= 1000) ||
-    (smokeVal !== null && smokeVal >= 200) ||
     (rawGasVal !== null && rawGasVal >= 1500) ||
     (irFlameVal !== null && irFlameVal >= 3500);
 
@@ -230,8 +226,6 @@ export const getSystemStatus = (sensorData) => {
   const isWarning =
     statusUpper === 'GAS_LEAK_ALERT' ||
     statusUpper === 'HIGH_TEMP_FIRE' ||
-    (lpgVal !== null && lpgVal > 800) ||
-    (smokeVal !== null && smokeVal > 100) ||
     (rawGasVal !== null && rawGasVal > 1200) ||
     (irFlameVal !== null && irFlameVal > 2500) ||
     (tempVal !== null && tempVal >= 40);

@@ -39,9 +39,7 @@ const ChartPage = () => {
   const [activeSeries, setActiveSeries] = useState({
     temperature: true,
     humidity: true,
-    lpg: false,
-    smoke: true,
-    rawGas: false,
+    rawGas: true,
     irFlame: false,
   });
 

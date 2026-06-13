@@ -140,52 +140,7 @@ const SensorChart = ({ data, activeSeries, hoursDiff }) => {
             />
           </>
         )}
-        {activeSeries.lpg && (
-          <>
-            <Area
-              type="monotone"
-              dataKey="lpg"
-              stroke="none"
-              fill="url(#gradient-lpg)"
-              name="LPG"
-              dot={false}
-              legendType="line"
-            />
-            <Area
-              type="monotone"
-              dataKey="lpg"
-              stroke={getChartColor('lpg')}
-              fill="none"
-              strokeWidth={2.5}
-              dot={false}
-              filter="url(#neonGlow)"
-              legendType="none"
-            />
-          </>
-        )}
-        {activeSeries.smoke && (
-          <>
-            <Area
-              type="monotone"
-              dataKey="smoke"
-              stroke="none"
-              fill="url(#gradient-smoke)"
-              name="Khói"
-              dot={false}
-              legendType="line"
-            />
-            <Area
-              type="monotone"
-              dataKey="smoke"
-              stroke={getChartColor('smoke')}
-              fill="none"
-              strokeWidth={2.5}
-              dot={false}
-              filter="url(#neonGlow)"
-              legendType="none"
-            />
-          </>
-        )}
+
         {activeSeries.rawGas && (
           <>
             <Area

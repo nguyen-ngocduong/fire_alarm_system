@@ -16,7 +16,7 @@ const CustomCursor = () => {
 
     const handleMouseMove = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
-      if (hidden) setHidden(false);
+      setHidden(false);
     };
 
     const handleMouseEnter = () => setHidden(false);
@@ -48,8 +48,6 @@ const CustomCursor = () => {
     document.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('mouseover', handleMouseOver);
 
-    document.documentElement.classList.add('custom-cursor-active');
-
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseenter', handleMouseEnter);
@@ -57,9 +55,20 @@ const CustomCursor = () => {
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mouseover', handleMouseOver);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isTouchDevice || hidden) {
+      document.documentElement.classList.remove('custom-cursor-active');
+    } else {
+      document.documentElement.classList.add('custom-cursor-active');
+    }
+
+    return () => {
       document.documentElement.classList.remove('custom-cursor-active');
     };
-  }, [hidden]);
+  }, [hidden, isTouchDevice]);
 
   if (isTouchDevice || hidden) return null;
 
