@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 
 # ==== Cấu hình MQTT ====
-MQTT_BROKER = "192.168.1.103" # Đảm bảo IP này là IP máy chạy Mosquitto
+MQTT_BROKER = "192.168.1.102" # Đảm bảo IP này là IP máy chạy Mosquitto
 MQTT_PORT = 1883
 MQTT_TOPIC = "fire_system/data"
 
