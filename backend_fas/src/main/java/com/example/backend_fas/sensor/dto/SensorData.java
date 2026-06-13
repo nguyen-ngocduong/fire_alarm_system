@@ -39,7 +39,7 @@ public class SensorData {
     }
     
     public boolean isGasLeak(){
-        return (lpg != null && lpg > LPG_THRESHOLD) || (raw_gas != null && raw_gas > RAW_GAS_THRESHOLD);
+        return (raw_gas != null && raw_gas > RAW_GAS_THRESHOLD);
     }
     
     public boolean isIrFlameDetected(){
