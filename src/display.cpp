@@ -28,10 +28,8 @@ void display_normal(const SensorData &data) {
     lcd.print("%");
 
     lcd.setCursor(0, 1);
-    lcd.print("L:");
-    lcd.print((int)data.lpg_ppm);
-    lcd.print(" S:");
-    lcd.print((int)data.smoke_ppm);
+    lcd.print("Gas: ");
+    lcd.print(data.gasValue);
 }
 
 void display_alert(const SensorData &data) {

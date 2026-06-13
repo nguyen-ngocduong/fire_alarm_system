@@ -34,7 +34,7 @@ void setup() {
   Wifi_init();
   
   // Initialize MQTT
-  mqtt_init("192.168.1.103", 1883);
+  mqtt_init("192.168.1.102", 1883);
 
   delay(1000);
 }
@@ -60,7 +60,7 @@ void loop() {
   data.irFlameAlert = irFlameAlert;
   
   data.tempAlert = (data.temperature > TEMP_THRESHOLD);
-  data.gasAlert = (data.lpg_ppm > LPG_THRESHOLD) || (data.gasValue > GAS_VALUE_THRESHOLD);
+  data.gasAlert = (data.gasValue > GAS_VALUE_THRESHOLD);
   data.anyAlert = data.tempAlert || data.gasAlert || data.flameAlert || data.irFlameAlert;
 
   // 3. Handle Actuators & Display
