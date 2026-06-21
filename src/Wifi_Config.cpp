@@ -6,8 +6,8 @@ const long gmtOffset_sec = 7 * 3600;
 const int daylightOffset_sec = 0;
 
 // ==== WiFi mặc định ====
-const char *ssid = "TP-Link_DA1C";
-const char *password = "12226160";
+const char *ssid = "Redmi10Pro ";
+const char *password = "bong:)))";
 
 // Access Point
 const char *apSSID = "ESP32_Config";

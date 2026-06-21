@@ -6,7 +6,7 @@
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-const char* mqtt_broker = "192.168.1.102";
+const char* mqtt_broker = "10.79.190.82";
 int mqtt_port = 1883;
 const char* topic_data = "fire_system/data";
 

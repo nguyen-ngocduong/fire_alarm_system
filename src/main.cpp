@@ -34,7 +34,7 @@ void setup() {
   Wifi_init();
   
   // Initialize MQTT
-  mqtt_init("192.168.1.102", 1883);
+  mqtt_init("10.79.190.82", 1883);
 
   delay(1000);
 }
