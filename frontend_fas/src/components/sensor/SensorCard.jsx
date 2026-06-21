@@ -1,4 +1,5 @@
-import Tilt from 'react-parallax-tilt';
+// Đã loại bỏ Tilt để giảm tải CPU
+// import Tilt from 'react-parallax-tilt';
 import Badge from '../common/Badge';
 import Icon from '../common/Icon';
 import {
@@ -55,18 +56,7 @@ const SensorCard = ({ sensorType, value }) => {
   const glowColor = sensorGlowMap[displayStatus] || sensorGlowMap.normal;
 
   return (
-    <Tilt
-      tiltMaxAngleX={10}
-      tiltMaxAngleY={10}
-      scale={1.02}
-      transitionSpeed={1500}
-      glareEnable={true}
-      glareMaxOpacity={0.12}
-      glareColor={getSensorColor(displayStatus)}
-      glarePosition="all"
-      glareBorderRadius="16px"
-      className="h-full"
-    >
+    <div className="h-full">
       <div
         className="card card-hover border-t-4 transition-all duration-300 h-full cursor-pointer"
         style={{ 
@@ -121,7 +111,7 @@ const SensorCard = ({ sensorType, value }) => {
           </div>
         )}
       </div>
-    </Tilt>
+    </div>
   );
 };
 

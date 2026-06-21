@@ -1,15 +1,11 @@
-import { motion } from 'framer-motion';
+// Đã loại bỏ motion để giảm tải CPU
+// import { motion } from 'framer-motion';
 
 const PageTransition = ({ children }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -15 }}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-    >
+    <div>
       {children}
-    </motion.div>
+    </div>
   );
 };
 

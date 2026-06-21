@@ -9,7 +9,8 @@
 }
 
 .animate-danger-pulse {
-  animation: danger-pulse 2s ease-in-out infinite;
+  /* Đã tắt hiệu ứng động để giảm tải CPU */
+  /* animation: danger-pulse 2s ease-in-out infinite; */
 }
 
 /* Slide in animation for toast notifications */
@@ -84,7 +85,8 @@
 }
 
 .animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  /* Đã tắt hiệu ứng động để giảm tải CPU */
+  /* animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; */
 }
 
 /* Scale animation for modal */
@@ -114,5 +116,6 @@
 }
 
 .animate-bounce {
-  animation: bounce 1s ease-in-out infinite;
+  /* Đã tắt hiệu ứng động để giảm tải CPU */
+  /* animation: bounce 1s ease-in-out infinite; */
 }

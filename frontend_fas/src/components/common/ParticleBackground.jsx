@@ -14,6 +14,9 @@ const ParticleBackground = ({ preset = 'auth' }) => {
     const resizeCanvas = () => {
       canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
       canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
+      if (particles.length > 0) {
+        animate();
+      }
     };
 
     resizeCanvas();
@@ -174,7 +177,8 @@ const ParticleBackground = ({ preset = 'auth' }) => {
       
       const layers = [[], [], []];
       for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
+        // Tắt di chuyển/update của hạt để giảm CPU
+        // particles[i].update();
         layers[particles[i].layer].push(particles[i]);
       }
 
@@ -202,7 +206,8 @@ const ParticleBackground = ({ preset = 'auth' }) => {
       }
       ctx.restore();
       
-      animationFrameId = requestAnimationFrame(animate);
+      // Đã tắt vòng lặp requestAnimationFrame hoàn toàn để tránh tràn CPU
+      // animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();

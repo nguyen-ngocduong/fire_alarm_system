@@ -432,3 +432,25 @@
 .icon-flip-v {
   transform: scaleY(-1);
 }
+
+/* ============================================
+   DISABLE ALL LOOPING ICON ANIMATIONS (CPU FIX)
+   ============================================ */
+.icon-fire-alert,
+.icon-siren,
+.icon-bell,
+.icon-warning,
+.icon-danger,
+.icon-sync,
+.icon-online,
+.icon-offline,
+.icon-connected,
+.icon-flame,
+.icon-smoke,
+.icon-gas,
+.icon-temperature,
+.icon-wifi,
+.icon-mqtt,
+.icon-firebase {
+  animation: none !important;
+}

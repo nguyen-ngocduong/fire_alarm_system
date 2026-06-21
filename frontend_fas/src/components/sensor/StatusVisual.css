@@ -27,7 +27,8 @@
 
 .radar-slow-rotate {
   transform-origin: center;
-  animation: slow-rotate 10s linear infinite;
+  /* Đã tắt hiệu ứng động để giảm CPU */
+  /* animation: slow-rotate 10s linear infinite; */
 }
 
 /* Radar Pulsing Rings */
@@ -48,12 +49,14 @@
 
 .radar-pulse {
   transform-origin: center;
-  animation: radar-pulse-anim 3s ease-in-out infinite;
+  /* Đã tắt hiệu ứng động để giảm CPU */
+  /* animation: radar-pulse-anim 3s ease-in-out infinite; */
 }
 
 .radar-pulse-fast {
   transform-origin: center;
-  animation: radar-pulse-anim 1.5s ease-in-out infinite;
+  /* Đã tắt hiệu ứng động để giảm CPU */
+  /* animation: radar-pulse-anim 1.5s ease-in-out infinite; */
 }
 
 /* Shockwave expansion */
@@ -76,13 +79,15 @@
 
 .radar-shockwave {
   transform-origin: center;
-  animation: shockwave-anim 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  /* Đã tắt hiệu ứng động để giảm CPU */
+  /* animation: shockwave-anim 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite; */
 }
 
 .radar-shockwave-delay {
   transform-origin: center;
-  animation: shockwave-anim 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
-  animation-delay: 1s;
+  /* Đã tắt hiệu ứng động để giảm CPU */
+  /* animation: shockwave-anim 2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite; */
+  /* animation-delay: 1s; */
 }
 
 /* Flame layer flicker animations */
@@ -133,17 +138,20 @@
 
 .outer-flame {
   transform-origin: bottom center;
-  animation: outer-flicker 0.6s ease-in-out infinite;
+  /* Đã tắt hiệu ứng động để giảm lag/delay */
+  /* animation: outer-flicker 0.6s ease-in-out infinite; */
 }
 
 .middle-flame {
   transform-origin: bottom center;
-  animation: middle-flicker 0.45s ease-in-out infinite;
+  /* Đã tắt hiệu ứng động để giảm lag/delay */
+  /* animation: middle-flicker 0.45s ease-in-out infinite; */
 }
 
 .inner-flame {
   transform-origin: bottom center;
-  animation: inner-flicker 0.3s ease-in-out infinite;
+  /* Đã tắt hiệu ứng động để giảm lag/delay */
+  /* animation: inner-flicker 0.3s ease-in-out infinite; */
 }
 
 .flame-group {
